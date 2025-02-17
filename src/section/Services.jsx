@@ -88,9 +88,9 @@ var settings = {
                             {/* details section */}
                             </div>
                             <div className='flex flex-col items-center gap-4'>
-                              <div className='space-y-3'>
-                                  <h1 className='text-xl font-bold pb-5'>{data.title}</h1>
-                                  <p className='text-gray-500 hover:text-white duration-300 text-sm'>{data.description}</p>
+                              <div className='space-y-3 text-center'>
+                                  <h1 className='text-xl  font-bold pb-5'>{data.title}</h1>
+                                  <p className='text-gray-500 hover:text-[#EB10E8] duration-300 text-sm'>{data.description}</p>
                               </div>
                             </div>
                         </div>
