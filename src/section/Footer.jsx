@@ -9,11 +9,11 @@ const Footer = () => {
       <div className='container p-4 flex justify-between'>
         <div className='flex flex-col md:flex-row gap-4 items-center'>
           <div>
-            <p className='text-white/35 text-[13px] md:text-[16px]'>
+            <p className='text-white/35 text-[11px] md:text-[16px]'>
                 &copy; {new Date().getFullYear()} Glam Booster. All rights reserved.
             </p>
           </div>
-          <div className='flex gap-4 text-[13px] md:text-[16px]'>
+          <div className='flex gap-4 text-[11px] md:text-[16px]'>
             <p className='text-white/35'>
               |
             </p>
@@ -28,7 +28,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <p className='text-white/35 text-[13px] md:text-[16px]'>
+        <p className='text-white/35 text-[11px] md:text-[16px]'>
           Victex Solutions
         </p>
       </div>
