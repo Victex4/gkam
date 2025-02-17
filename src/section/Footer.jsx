@@ -6,12 +6,14 @@ const Footer = () => {
 
   return (
     <footer className='bg-black/95' id='contact'>
-      <div className='flex flex-col-reverse md:flex-col'>
-        <div className='container p-4 flex justify-between'>
-          <div className='flex gap-4'>
-            <p className='text-white/35'>
+      <div className='container p-4 flex justify-between'>
+        <div className='flex flex-col md:flex-row gap-4 items-center'>
+          <div>
+            <p className='text-white/35 text-[13px] md:text-[16px]'>
                 &copy; {new Date().getFullYear()} Glam Booster. All rights reserved.
             </p>
+          </div>
+          <div className='flex gap-4 text-[13px] md:text-[16px]'>
             <p className='text-white/35'>
               |
             </p>
@@ -25,10 +27,10 @@ const Footer = () => {
               Privacy Policy
             </p>
           </div>
-          <p className='text-white/35'>
-            Victex Solutions
-          </p>
         </div>
+        <p className='text-white/35 text-[13px] md:text-[16px]'>
+          Victex Solutions
+        </p>
       </div>
       {contactUsPopUp && (
         <ContactUs setContactUsPopUp={setContactUsPopUp}/> 
