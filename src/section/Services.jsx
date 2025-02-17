@@ -57,14 +57,14 @@ var settings = {
     {
       breakpoint: 640,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 1,
         slidesToScroll: 1,
       },
     },
   ],
 }
   return (
-    <section className='bg-[#FFE9FE] py-10 mb-10'  id='services'>
+    <section className='bg-[#FFE9FE] py-10'  id='services'>
       <div className='container'>
         <div>
           <div>
@@ -73,13 +73,13 @@ var settings = {
             className='text-center text-4xl font-bold text-[#EB10E8]'>Glam Booster Provides</h1>
           </div>
         </div>
-        <div className='py-[1rem]'>
+        {/* <div className='py-[1rem]'> */}
           {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-20 p-8 md:gap-5 place-items-center'> */}
             <div data-aos= "zoom-in">
               <Slider {...settings}>
                   {
                     serviceData.map((data) => (
-                      <div className='my-8 grid grid-cols-1 md:grid-cols-2 '>
+                      <div className='my-8'>
                         <div 
                         className='flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800 bg-white/90 relative'>
                             {/* image section */}
@@ -87,9 +87,11 @@ var settings = {
                               <span><data.icon className='text-6xl md:text-7xl mx-auto'/></span>
                             {/* details section */}
                             </div>
-                            <div className='p-4 text-center'>
-                                <h1 className='text-xl font-bold pb-5'>{data.title}</h1>
-                                <p className='text-gray-500 group-hover:text-white duration-300 text-sm'>{data.description}</p>
+                            <div className='flex flex-col items-center gap-4'>
+                              <div className='space-y-3'>
+                                  <h1 className='text-xl font-bold pb-5'>{data.title}</h1>
+                                  <p className='text-gray-500 hover:text-white duration-300 text-sm'>{data.description}</p>
+                              </div>
                             </div>
                         </div>
                       </div>
@@ -99,7 +101,7 @@ var settings = {
             </div>
             {/* </div> */}
         </div>
-      </div>
+      {/* </div> */}
     </section>
   )
 }
