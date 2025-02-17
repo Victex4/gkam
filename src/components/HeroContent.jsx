@@ -32,7 +32,7 @@ const HeroContent = ({ variants }) => {
     >
     </ReactTyped>
       </h2>
-      <p className='text-gray-400 mt-4 md:text-lg'>
+      <p className='text-gray-500 mt-4 md:text-lg'>
         Join thousands of brands and influencers who have amplified their social media presence with Glam Booster, a trusted service in social media enhancement.
       </p>
       <div className='flex items-center gap-2 mt-5'>
