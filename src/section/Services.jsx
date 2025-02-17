@@ -70,7 +70,7 @@ var settings = {
           <div>
             <h1 
             data-aos="fade-up"
-            className='text-center text-4xl font-bold text-[#EB10E8]'>Glam Booster Provides</h1>
+            className='text-center text-2xl md:text-4xl font-bold text-[#EB10E8]'>Glam Booster Provides</h1>
           </div>
         </div>
         {/* <div className='py-[1rem]'> */}
