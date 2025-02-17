@@ -6,7 +6,7 @@ import { ReactTyped } from "react-typed";
 const HeroContent = ({ variants }) => {
   return (
     <motion.div variants={variants} className='text-left md:max-w-72 lg:max-w-lg'>
-      <h2 className='mt-4 text-3xl font-bold tracking-wide text-gray-500 md:text-4xl lg:mt-8 lg:text-5xl'>
+      <h2 className='mt-4 text-3xl font-bold tracking-wide text-gray-8~00 md:text-4xl lg:mt-8 lg:text-5xl'>
         {/* <Typed 
           strings={[
             "Boost your social media impact",
