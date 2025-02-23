@@ -53,7 +53,7 @@ const Contact = () => {
                 <h1 className='text-2xl font-bold text-gray-800'>
                    Need Assistance or Have a Request?
                 </h1>
-                <p className='text-gray-800'>
+                <p className='text-gray-800 text-[15px]'>
                   Need Help or Want to Collaborate? Feel free to reach out through the options below, and we'll respond as soon as possible!
                 </p>
                 <motion.div className='flex flex-col gap-5'

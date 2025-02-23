@@ -17,7 +17,7 @@ const Step = () => {
               data-aos="fade-up"
               className='flex gap-6'>
               <div>
-                <h2 className='rounded-[50px] px-8 py-6 bg-[#EB10E8] text-white'>
+                <h2 className='rounded-[50px] px-6 py-4 md:px-8 md:py-6 bg-[#EB10E8] text-white'>
                   1
                 </h2>
               </div>
@@ -34,7 +34,7 @@ const Step = () => {
               data-aos="fade-up"
               className='flex gap-6 py-4'>
               <div>
-                <h2 className='rounded-[50px] px-8 py-6 bg-[#EB10E8] text-white'>
+                <h2 className='rounded-[50px] px-6 py-4 md:px-8 md:py-6 bg-[#EB10E8] text-white'>
                   2
                 </h2>
               </div>
@@ -51,7 +51,7 @@ const Step = () => {
               data-aos="fade-up"
               className='flex gap-6 py-4'>
               <div>
-                <h2 className='rounded-[50px] px-8 py-6 bg-[#EB10E8] text-white'>
+                <h2 className='rounded-[50px] px-6 py-4 md:px-8 md:py-6 bg-[#EB10E8] text-white'>
                   3
                 </h2>
               </div>
@@ -68,7 +68,7 @@ const Step = () => {
               data-aos="fade-up"
               className='flex gap-6 py-4'>
               <div>
-                <h2 className='rounded-[50px] px-8 py-6 bg-[#EB10E8] text-white'>
+                <h2 className='rounded-[50px] px-6 py-4 md:px-8 md:py-6 bg-[#EB10E8] text-white'>
                   4
                 </h2>
               </div>
@@ -85,7 +85,7 @@ const Step = () => {
               data-aos="fade-up"
               className='flex gap-6 py-4'>
               <div>
-                <h2 className='rounded-[50px] px-8 py-6 bg-[#EB10E8] text-white'>
+                <h2 className='rounded-[50px] px-6 py-4 md:px-8 md:py-6 bg-[#EB10E8] text-white'>
                   5
                 </h2>
               </div>
