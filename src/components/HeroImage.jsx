@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 const HeroImage = ({ variants }) => {
   return (
     <motion.div> 
-      <div className='absolute right-14 top-0 translate-y-1/2 mt-[12rem] md:w-[350px] w-[350px] h-[350px] md:h-[350px] rounded-full border-[#EB10E8] border-[32px] z-10' data-aos="fade-up"></div>
+      <div className='absolute right-6 top-0 translate-y-1/2 mt-[12rem] md:w-[350px] w-[250px] h-[250px] md:h-[350px] rounded-full border-[#EB10E8] border-[32px] z-10' data-aos="fade-up"></div>
       <img className='absolute animate-bounce-up top-0 md:left-1/2 md:top-0 mt-[6rem] w-[800px] md:w-[800px] right-0 z-20' data-aos="fade-up" src={userImage} alt="User Image" />
       {/* <img src={blob} alt="" /> */}
     </motion.div>
