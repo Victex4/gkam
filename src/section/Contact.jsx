@@ -40,7 +40,7 @@ const Contact = () => {
     initial="hidden"
     animate={isInView ? "visible" : "hidden"}
     > 
-      <SectionTitle title="Contact Me"/> 
+      <SectionTitle title="Contact Us"/> 
       <div className='container mt-10 flex flex-col gap-10 rounded-2xl border-2 border-white/10 bg-[#F583F3] p-10 md:flex-row'>
         <motion.div className='flex flex-1 items-center justify-center'
          variants={fadeInVariants}
