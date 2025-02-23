@@ -6,39 +6,22 @@ import { ReactTyped } from "react-typed";
 const HeroContent = ({ variants }) => {
   return (
     <motion.div variants={variants} className='text-left md:max-w-72 lg:max-w-lg'>
-      <h2 className='mt-4 text-3xl font-bold tracking-wide text-gray-8~00 md:text-4xl lg:mt-8 lg:text-5xl'>
-        {/* <Typed 
-          strings={[
-            "Boost your social media impact",
-            "Enhance your online presence.",
-            "Expand your digital reach.",
-          ]}
-          typeSpeed={150}
-          backSpeed={100}
-          loo
-        /> */}
-        {/* <ReactTyped strings={["Here you can find anything"]} typeSpeed={40} />
-    <br /> */}
-
-    <ReactTyped
+      <h2 className='mt-4 text-4xl text-[#EB10E8] font-bold tracking-wide md:text-5xl lg:mt-8 lg:text-5xl'>
+    Boost your <span className='text-gray-900'><ReactTyped
       strings={[
-        "Boost your social media impact",
-        "Enhance your online presence.",
-        "Expand your digital reach.",
+        "social media impact",
+        "online presence.",
+        "digital reach.",
       ]}
       typeSpeed={80}
       backSpeed={90}
       loop
     >
-    </ReactTyped>
+    </ReactTyped></span>
       </h2>
-      <p className='text-gray-500 mt-4 md:text-lg'>
+      <p className='text-gray-500 mt-4 md:text-lg pb-4 md:pb-0'>
         Join thousands of brands and influencers who have amplified their social media presence with Glam Booster, a trusted service in social media enhancement.
       </p>
-      <div className='flex items-center gap-2 mt-5'>
-        <Button>Register</Button>
-        <Button variant='outline'>Login</Button>
-      </div>
     </motion.div>
   )
 }

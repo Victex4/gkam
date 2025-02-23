@@ -49,7 +49,7 @@ const Hero = ({ menuOpen }) => {
     },
   };
   return (
-    <motion.section className='overflow-hidden bg-[#FFE9FE]' id='#'
+    <motion.section className='overflow-hidden bg-[#FFBBFF]' id='#'
     variants={containerVariants}
     initial="hidden"
     animate="visible"

@@ -4,7 +4,7 @@ import Button from '../components/Button'
 const Login = ({ handleLoginPopUp, handleAccPopUp }) => {
   return (
     <section className='bg-[#FFE9FE]'>
-      <div className='container flex gap-4 items-center pt-8 md:pt-0 justify-center'>
+      <div className='container flex gap-4 items-center py-8 md:py-[2rem] justify-center'>
         <div  data-aos="fade-up animate-bounce-up" >
           <p className="md:px-20 animate-bounce-up px-10 py-4 bg-white md:py-8 rounded-2xl md:text-2xl font-semibold" >
             30,000+ <span>Orders</span>

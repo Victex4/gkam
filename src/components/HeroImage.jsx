@@ -1,16 +1,18 @@
 import React from 'react'
-import userImage from "../assets/social4-removebg-preview.png"
+import userImage from "../assets/heroImage-removebg-preview.png"
 import AnimatedIcon from './AnimatedIcon'
 import { BiLogoCss3, BiLogoJavascript, BiLogoReact, BiLogoTailwindCss } from 'react-icons/bi'
 import { motion } from 'framer-motion'
+import blob from "../assets/blob.svg"
 
 const HeroImage = ({ variants }) => {
   return (
-    <motion.div 
-    variants={variants}
-    className='mask-gradient absolute right-0 top-0 h-[550px] w-full overflow-hidden rounded-bl-full rounded-br-full border-r-[10px] border-blue-500 bg-[#EB10E8] md:h-[600px] md:w-[450px]'> 
-      <img className='absolute animate-bounce-up bottom-0 w-[450px] top-1/2 right-9' src={userImage} alt="User Image" />
+    <motion.div> 
+      <div className='absolute md:right-0 left-32 top-0 translate-y-1/2 mt-[12rem] md:w-[350px] w-[250px] h-[250px] md:h-[350px] rounded-full border-[#EB10E8] border-[32px] z-10' data-aos="fade-up"></div>
+      <img className='absolute animate-bounce-up left-8 top-0 md:left-1/2 md:top-0 mt-[6rem] w-[800px] right-0 z-20' data-aos="fade-up" src={userImage} alt="User Image" />
+      <img src={blob} alt="" />
     </motion.div>
+
   )
 }
 

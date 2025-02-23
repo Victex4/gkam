@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import ContactUs from '../components/ContactUs';
 
 const Footer = () => {
   const [contactUsPopUp, setContactUsPopUp] = useState(false);
 
   return (
     <footer className='bg-black/95' id='contact'>
-      <div className='container p-4 flex justify-between'>
+      <div className='p-4 flex justify-between'>
         <div className='flex flex-col md:flex-row gap-4 items-center'>
           <div>
             <p className='text-white/35 text-[11px] md:text-[16px]'>
@@ -32,9 +31,9 @@ const Footer = () => {
           Victex Solutions
         </p>
       </div>
-      {contactUsPopUp && (
+      {/* {contactUsPopUp && (
         <ContactUs setContactUsPopUp={setContactUsPopUp}/> 
-      )}
+      )} */}
   </footer>
   )
 }
