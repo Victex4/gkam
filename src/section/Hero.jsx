@@ -49,12 +49,15 @@ const Hero = ({ menuOpen }) => {
     },
   };
   return (
-    <motion.section className='overflow-hidden bg-[#FFBBFF]' id='#'
+    <motion.section className='overflow-hidden bg-[#FFE9FE]' id='#'
     variants={containerVariants}
     initial="hidden"
     animate="visible"
     >
       <div className={`container transition-all duration-300 ${menuOpen ? "px-10 blur-sm" : ""}`}>
+      <div className='h-[700px] w-[700px] bg-[#F583F3] absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-9'>
+
+      </div>
         <div className='relative flex h-screen flex-col-reverse items-center md:flex-row '>
             {/* Hero Content */}
                 <HeroContent variants={contentVariants}/> 

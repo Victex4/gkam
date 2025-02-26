@@ -1,21 +1,23 @@
 import React from 'react'
+import step from '../assets/stepimage2-removebg-preview.png'
 
 const Step = () => {
   return (
     <section className='bg-[#FFE9FE]'>
-      <div className='container pt-[8rem] pb-[4rem]'>
+      <div className='pt-[8rem] pb-[4rem]'>
         <div className='pb-[3rem]'>
-            <p className='text-3xl md:text-5xl font-semibold text-center '>Follow These Simple Steps to <span className='text-[#EB10E8]'>Get Started</span></p>
+            <p className='container text-3xl md:text-5xl font-semibold text-center '>Follow These Simple Steps to <span className='text-[#EB10E8]'>Get Started</span></p>
         </div>
-        <div className='pt-[rem]'>
+        <div className='pt-[rem] flex flex-col md:flex-row justify-between items-center'>
             {/* StepImage section */}
-            <div>
-                
+            <div className='mask-gradient h-[350px] w-full overflow-hidden rounded-l-xl rounded-br-full border-l-[10px] border-blue-500 bg-[#EB10E8] md:h-[450px] md:w-[650px]'>
+                <img src={step} className='md:w-[400px] w-[300px]' alt="" />
             </div>
             {/* StepContent section */}
+            <div className='container md:w-[55%] w-[90%]'>
               <div 
               data-aos="fade-up"
-              className='flex gap-6'>
+              className='flex gap-6 pb-4'>
               <div>
                 <h2 className='rounded-[50px] px-6 py-4 md:px-8 md:py-6 bg-[#EB10E8] text-white'>
                   1
@@ -98,6 +100,7 @@ const Step = () => {
                   </p>
                 </div>
               </div>
+            </div>
             <div>
         </div>
         </div>

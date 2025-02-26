@@ -84,9 +84,9 @@ const Header = ({menuOpen, setMenuOpen}) => {
             animate="visible"
             >
               <div>
-                <Button variant='outline'>
+                <button className='rounded-full px-8 py-2 uppercase bg-transparent text-[#EB10E8] border-2 border-[#EB10E8] hover:bg-[#EB10E8] hover:text-white'>
                    Register
-                </Button>
+                </button>
               </div>
             </motion.div>
 
