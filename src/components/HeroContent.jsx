@@ -29,7 +29,7 @@ const HeroContent = ({ variants }) => {
       </div>
       <div className='block md:hidden'>
       <h2 className='mt-4 text-5xl text-gray-900 py-4 font-bold tracking-wide md:text-6xl lg:mt-8 lg:text-5xl'>
-        Grow your Social<span className='text-[#EB10E8]'> Media </span> Audience
+        Grow your <span className='text-[#EB10E8]'> Social </span> Media Audience
           </h2>
           <p className='text-2xl font-medium text-blue-500'>
           <ReactTyped
