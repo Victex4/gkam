@@ -8,7 +8,8 @@ import { CiLocationOn } from "react-icons/ci";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
-
+import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 
 export const menuItems = [
@@ -77,14 +78,22 @@ export const contactDetails = [
    {
         id: 3,
         type: "Whatsapp",
-        value: "Victex Solutions",
+        value: "Glam Booster",
         link: "https://wa.me/+2348065493663", 
         icon: FaWhatsapp  
     },
    {
-        id: 4,
-        type: "Location",
-        value: "Anambra, Nigeria",
-        icon: CiLocationOn  
+        id: 3,
+        type: "Instagram",
+        value: "Instagram",
+        link: "https://www.instagram.com/yourusername/", 
+        icon: FaInstagram  
+    },
+   {
+        id: 3,
+        type: "Twitter",
+        value: "Twitter",
+        link: "https://wa.me/+2348065493663", 
+        icon: FaXTwitter  
     },
 ]

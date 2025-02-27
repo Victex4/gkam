@@ -1,5 +1,5 @@
 import React from 'react'
-import step from '../assets/stepimage2-removebg-preview.png'
+import step from '../assets/herimg3-removebg-preview.png'
 
 const Step = () => {
   return (
