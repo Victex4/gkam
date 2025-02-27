@@ -58,7 +58,7 @@ const Hero = ({ menuOpen }) => {
       <div className='md:h-[700px] h-[700px] w-[400px] md:w-[700px] bg-[#F583F3] absolute -top-1/2 right-20 md:right-0 rounded-3xl rotate-12 md:rotate-45 -z-9'>
 
       </div>
-        <div className='relative flex md:h-screen mt-[363px] flex-col-reverse items-center md:flex-row '>
+        <div className='relative flex md:h-screen mt-[150px] flex-col-reverse items-center md:flex-row '>
             {/* Hero Content */}
                 <HeroContent variants={contentVariants}/> 
 
