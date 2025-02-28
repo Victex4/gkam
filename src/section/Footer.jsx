@@ -12,7 +12,7 @@ const Footer = () => {
                 &copy; {new Date().getFullYear()} Glam Booster. All rights reserved.
             </p>
           </div>
-          <div className='gap-4 text-[11px] md:text-[16px]'>
+          <div className='text-[11px] md:text-[16px]'>
             <p className='text-[#EB10E8] font-semibold'>
               Privacy Policy
             </p>
