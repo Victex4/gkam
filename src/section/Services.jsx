@@ -3,6 +3,7 @@ import { FaUsers } from "react-icons/fa";
 import { FaBullhorn } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa";
 import { MdTouchApp } from "react-icons/md";
+import { MdEmojiEvents } from "react-icons/md";
 import Slider from 'react-slick';
 
 const Services = () => {
@@ -31,6 +32,12 @@ const Services = () => {
         title: "User-Friendly Interface",
         description: "The platform is designed with a user-friendly interface, making it easy for users to navigate and utilize the various tools and services offered.",
     },
+    {
+        id:5,
+        icon: MdEmojiEvents,
+        title: "Task-Based Rewards",
+        description: "Implement a system where users complete specific tasks to earn rewards, such as increased visibility for their content, fostering higher engagement and loyalty.",
+    },
 ]
 
   return (
@@ -43,7 +50,7 @@ const Services = () => {
             className='text-center text-3xl md:text-4xl pb-7 font-bold text-[#EB10E8] pt-[2rem]'>Glam Booster Provides</h1>
           </div>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-20 md:gap-5 place-items-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 md:gap-5 place-items-center'>
             {
               serviceData.map((data) => (
                 <div 
