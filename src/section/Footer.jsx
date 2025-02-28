@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className='bg-black/95' id='contact'>
       <div className='py-4 px-2 flex justify-between'>
-        <div className='flex gap-4 items-center'>
+        <div className='flex gap-4'>
           <div>
             <p className='text-white/35 text-[11px] md:text-[16px]'>
                 &copy; {new Date().getFullYear()} Glam Booster. All rights reserved.
