@@ -58,7 +58,7 @@ const Services = () => {
                 className='rounded-2xl bg-white hover:bg-[#EB10E8] hover:text-white relative shadow-xl duration-300 group max-w-[300px]'>
                     {/* image section */}
                     <div className=''>
-                      <span><data.icon className='text-6xl md:text-8xl py-4 mx-auto'/></span>
+                      <span><data.icon className='text-8xl py-4 mx-auto'/></span>
                     </div>
                     <div className='p-4 text-center'>
                         {/* starRating section */}
