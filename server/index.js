@@ -82,7 +82,7 @@ app.post("/api/auth/signup", async (req, res) => {
       },
     });
 
-   const verifyUrl = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
+const verifyUrl = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
 
     await transporter.sendMail({
       from: `"Glam Booster" <${process.env.EMAIL_USER}>`,
