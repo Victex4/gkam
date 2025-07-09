@@ -9,11 +9,11 @@ const MobileMenu = ({setMenuOpen, menuItems, menuOpen}) => {
         <Logo />
       </div>
       <hr className='my-3 border-2 border-white/5'/>
-        <ul className='mt-5 flex-col flex space-y-3 mb-5'>
+        <ul className='mt-5 flex-col flex space-y-3 mb-5 pl-0'>
             {
                 menuItems.map((item)=> (
                     <li key={item.href}>
-                        <a href={item.href} className='nav-item p-2'>{item.label}</a>
+                        <a href={item.href} className='nav-item p-2 no-underline'>{item.label}</a>
                     </li>
                 ))
             }

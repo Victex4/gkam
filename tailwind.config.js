@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'plus-pattern': "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff25'%3E%3Crect x='9' width='2' height='20'/%3E%3Crect y='9' width='20' height='2'/%3E%3C/g%3E%3C/svg%3E\")"
+      },
       fontFamily: {
         sans: ["Poppins", "serif"],
         },
@@ -49,9 +52,19 @@ export default {
       animation: {
         "bounce-up": "bounce-up 3s ease-in-out infinite",
         "move-left": "move-left 1s linear infinite",
-      }
+      },
+      keyframes: {
+        'bounce-right': {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(10px)' },
+        },
+      },
+      animation: {
+        'bounce-right': 'bounce-right 1s infinite',
+      },
     },
   },
+  
   plugins: [],
   darkMode: "class",
 }

@@ -55,7 +55,7 @@ const Hero = ({ menuOpen }) => {
     animate="visible"
     >
       <div className={`container transition-all duration-300 ${menuOpen ? "px-10 blur-sm" : ""}`}>
-      <div className='md:h-[700px] h-[700px] w-[400px] md:w-[700px] bg-[#F583F3] absolute -top-1/2 right-20 md:right-0 rounded-3xl rotate-12 md:rotate-45 -z-9'>
+      <div className='md:h-[600px] h-[700px] w-[400px] md:w-[700px] bg-[#F583F3] absolute -top-1/2 right-20 md:right-28 rounded-3xl rotate-12 md:rotate-45 -z-9'>
 
       </div>
         <div className='relative flex md:h-screen mt-[150px] md:mt-0 flex-col-reverse items-center md:flex-row '>

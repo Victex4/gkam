@@ -18,7 +18,7 @@ const Button = ({ children, variant = "primary", className }) => {
 
   const variants = {
     primary: "bg-[#F36BF1] text-white/90 border-none hover:bg-[#EB10E8]",
-    outline: "bg-transparent text-[#EB10E8] border-2 border-[#EB10E8] hover:bg-[#EB10E8] hover:text-white"
+    outline: "bg-transparent text-[#EB10E8] border-2 border-[#EB10E8] hover:bg-[#EB10E8] hover:"
   }
   return (
     <motion.button className={twMerge(`rounded-full px-16 py-3 uppercase ${variants[variant]}`, 

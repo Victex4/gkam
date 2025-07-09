@@ -6,6 +6,7 @@ import { BiMenuAltRight } from 'react-icons/bi'
 import MobileMenu from '../components/MobileMenu'
 import Logo from '../components/Logo'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 
 const Header = ({menuOpen, setMenuOpen}) => {
@@ -72,8 +73,8 @@ const Header = ({menuOpen, setMenuOpen}) => {
             >
                 {
                     menuItems.map((item)=> (
-                        <motion.li key={item.href} className=' hover:scale-100 text-gray-700 duration-150 hover:bg-[#EB10E8] rounded-lg hover:text-white/90 p-2' variants={menuItemVariants}>
-                            <a href={item.href} className='nav-item'>{item.label}</a>
+                        <motion.li key={item.href} className=' hover:scale-100 text-gray-700 duration-150 no-underline rounded-lg hover:text-white/90 p-2' variants={menuItemVariants}>
+                            <a href={item.href} className='nav-item no-underline'>{item.label}</a>
                         </motion.li>
                     ))
                 }
@@ -83,11 +84,13 @@ const Header = ({menuOpen, setMenuOpen}) => {
             initial="hidden"
             animate="visible"
             >
-              <div>
-                <button className='rounded-full px-8 py-2 uppercase bg-transparent text-[#EB10E8] border-2 border-[#EB10E8] hover:bg-[#EB10E8] hover:text-white'>
-                   Register
-                </button>
-              </div>
+              <Link to="/register">
+                <div>
+                  <button className='rounded-full px-8 py-2 uppercase bg-transparent text-[#EB10E8] border-2 border-[#EB10E8] hover:bg-[#EB10E8] hover:scale-100 duration-150'>
+                    Register
+                  </button>
+                </div> 
+              </Link>
             </motion.div>
 
             <motion.button className='text-4xl text-gray-500 md:hidden' 

@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 // const USER_RAGEX = /^[a-zA-Z][a-zA-ZO-9-_]{3,23}$/;
 // const PWD_RAGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const Register = ({ loginPopUp }) => {
+const LoginModal = ({ loginPopUp }) => {
   // const userRef = useRef();
   // const errRef = useRef();
 
@@ -84,5 +84,5 @@ const Register = ({ loginPopUp }) => {
   )
 }
 
-export default Register
+export default LoginModal
 

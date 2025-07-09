@@ -50,12 +50,12 @@ const Services = () => {
             className='text-center text-3xl md:text-4xl pb-7 font-bold text-[#EB10E8] pt-[2rem]'>Glam Booster Provides</h1>
           </div>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-20 md:gap-5 place-items-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 group md:grid-cols-3 gap-20 md:gap-5 place-items-center'>
             {
               serviceData.map((data) => (
                 <div 
                 data-aos= "zoom-in"
-                className='rounded-2xl bg-white hover:bg-[#EB10E8] hover:text-white relative shadow-xl duration-300 group max-w-[300px]'>
+                className='rounded-2x group-hover:scale-105 duration-300 bg-white hover:bg-[#EB10E8] relative shadow-xl max-w-[300px]'>
                     {/* image section */}
                     <div className=''>
                       <span><data.icon className='text-8xl py-4 mx-auto'/></span>

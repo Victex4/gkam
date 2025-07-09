@@ -4,9 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+};
+
 html{
     scroll-behavior: smooth;
 }
+
+html{
+    list-style: none;
+    text-decoration: none;
+}
+
+* {
+    @apply transition-colors duration-200; 
+  }
 
 @layer base{
     .nav-item {
