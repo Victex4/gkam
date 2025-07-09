@@ -30,6 +30,7 @@ import PaymentHis from './components/modals/PaymentHis'
 import TaskCenter from './components/modals/TaskCenter'
 import LogOutPopUp from './components/modals/LogOutPopUp'
 import ForgotPassword from './components/ForgotPassword'
+import VerifyEmail from './section/VerifyEmail'
 // import SignUp from './SignUp'
 // import LoginModal from './LoginModal'
 
@@ -92,6 +93,8 @@ const App = () => {
           <Route path='/proceed' element={<ProceedPayment toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path='/history' element={<PaymentHis toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path='/taskcenter' element={<TaskCenter toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
+          <Route path="/verify-email" element={<VerifyEmail />} />
+
         </Routes>
       </div>
     </Router>
