@@ -19,6 +19,8 @@ import { FaLink } from "react-icons/fa";
 import { MdTaskAlt, MdPendingActions } from "react-icons/md";
 import { FaClipboardList } from "react-icons/fa";
 import { GiMechanicGarage } from "react-icons/gi";
+import { MdChecklist, MdAddTask, MdManageAccounts, MdAdminPanelSettings } from "react-icons/md";
+
 
 
 
@@ -31,52 +33,60 @@ import user4 from "../assets/user4.png";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export const links = [
-    {
-        href: "/dashboard",
-        icon: FaChartBar,
-        text: "Home"
-    },
-    {
-        href: "/order",
-        icon: MdShoppingCart,
-        text: "Order",
-        // badge: {
-        //     text: "Pro",
-        //     color: "bg-gray-100 text-gray-800",
-        //     darkColor: "dark:bg-gray-700 dark:text-gray-300",
-        // },
-    },
-    {
-        href: "/account",
-        icon: MdAccountCircle,
-        text: "Account",
-        // badge: {
-        //     text: "4",
-        //     color: "bg-gray-100 text-gray-800",
-        //     darkColor: "dark:bg-gray-900 dark:text-gray-300",
-        // },
-    },
-    {
-        href: "/addfunds",
-        icon: AiOutlinePlusCircle,
-        text: "Add Funds"
-    },
-    {
-        href: "/task",
-        icon: FaLink,
-        text: "Affiliates"
-    },
-    {
-        href: "/api",
-        icon: MdApi,
-        text: "API"
-    },
-    {
+  {
+    href: "/dashboard",
+    icon: FaChartBar,
+    text: "Home"
+  },
+  {
+    href: "/order",
+    icon: MdShoppingCart,
+    text: "Order",
+  },
+  {
+    href: "/account",
+    icon: MdAccountCircle,
+    text: "Account",
+  },
+  {
+    href: "/addfunds",
+    icon: AiOutlinePlusCircle,
+    text: "Add Funds"
+  },
+  {
+    href: "/task",
+    icon: FaLink,
+    text: "Affiliates"
+  },
+  {
+    href: "/taskcenter",
+    icon: MdChecklist,
+    text: "Task Center"
+  },
+  {
+    href: "/admin/add-task",
+    icon: MdAddTask,
+    text: "Add Task",
+    admin: true  // ✅ Only show for admins
+  },
+  {
+    href: "/admin/manage-tasks",
+    icon: MdManageAccounts,
+    text: "Manage Tasks",
+    admin: true  // ✅ Only show for admins
+  },
+  {
+    href: "/api",
+    icon: MdApi,
+    text: "API"
+  },
+  {
     href: "/login",
     icon: IoIosLogOut,
     text: "Log-out",
-    }
+  }
 ];
+
 
 export const employeesData = [
     {

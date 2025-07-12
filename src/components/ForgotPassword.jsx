@@ -1,6 +1,6 @@
 // ===== src/pages/ForgotPassword.jsx =====
 import React, { useState } from 'react';
-// import Alert from '../components/alert/Alert';
+import Alert from '../components/Alert.jsx';
 import ForgotPassPopUp from '../components/ForgotPassPopUp';
 
 const ForgotPassword = () => {
@@ -8,6 +8,7 @@ const ForgotPassword = () => {
   const [alertType, setAlertType] = useState('');
   const [msg, setMsg] = useState('');
   const [forgotPassPopUp, setForgotPassPopUp] = useState(false);
+  const [showCheckEmailModal, setShowCheckEmailModal] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,7 +18,7 @@ const ForgotPassword = () => {
       return;
     }
     try {
-      const res = await fetch('http://localhost:3001/api/auth/forgot-password', {
+      const res = await fetch(`${import.meta.env.VITE_API}/api/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -27,6 +28,7 @@ const ForgotPassword = () => {
         setMsg('Email does not exist');
         setAlertType('error');
       } else {
+        // ✅ Show your ForgotPassPopUp first
         setForgotPassPopUp(true);
       }
     } catch (err) {
@@ -35,10 +37,16 @@ const ForgotPassword = () => {
     }
   }
 
+  // ✅ When ForgotPassPopUp closes, show "Check your email" modal
+  const handleForgotPassPopUpClose = () => {
+    setForgotPassPopUp(false);
+    setShowCheckEmailModal(true);
+  };
+
   return (
     <div>
       <div className="flex justify-center min-h-[100vh] items-center bg-white">
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
           <div className="flex justify-center ">
             <img src="/logo.svg" className="w-16" alt="" />
           </div>
@@ -79,11 +87,29 @@ const ForgotPassword = () => {
         </form>
       </div>
 
-      {/* Forgot Password PopUp */}
+      {/* ✅ Forgot Password PopUp */}
       <ForgotPassPopUp
         forgotPassPopUp={forgotPassPopUp}
-        setForgotPassPopUp={setForgotPassPopUp}
+        setForgotPassPopUp={handleForgotPassPopUpClose}
       />
+
+      {/* ✅ Fancy Check Email Modal */}
+      {showCheckEmailModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-6 shadow-lg w-[350px] text-center">
+            <h2 className="text-2xl font-bold mb-2">Check your email 📧</h2>
+            <p className="text-gray-600 mb-4">
+              We’ve sent a password reset link to <strong>{email}</strong>. Please check your inbox and follow the instructions.
+            </p>
+            <button
+              onClick={() => setShowCheckEmailModal(false)}
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
+              Okay
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -31,6 +31,9 @@ import TaskCenter from './components/modals/TaskCenter'
 import LogOutPopUp from './components/modals/LogOutPopUp'
 import ForgotPassword from './components/ForgotPassword'
 import VerifyEmail from './section/VerifyEmail'
+import RecoverPassword from './section/RecoverPassword'
+import AddTask from './components/modals/AddTask'
+import AdminTaskManager from './components/modals/AdminTaskManager'
 // import SignUp from './SignUp'
 // import LoginModal from './LoginModal'
 
@@ -94,7 +97,12 @@ const App = () => {
           <Route path='/history' element={<PaymentHis toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path='/taskcenter' element={<TaskCenter toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path="/verify-email" element={<VerifyEmail />} />
-
+          <Route path="/recover-password" element={<RecoverPassword />} />
+          <Route path="/admin/add-task" element={<AddTask toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen} />} />
+          <Route
+          path="/admin/manage-tasks"
+          element={<AdminTaskManager toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen} />}
+        />
         </Routes>
       </div>
     </Router>
