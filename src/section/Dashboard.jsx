@@ -11,10 +11,9 @@ import Social from "../components/Media/Social";
 const Dashboard = () => {
   const [isSideBarOpen, setIssideBarOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState("ALL");
+  const [logOutPopUp, setLogOutPopUp] = useState(false); // ✅ Add this!
 
-  // ✅ Get the logged-in user
   const user = JSON.parse(localStorage.getItem("user")); 
-  // Or use your AuthContext
 
   const toggleSideBar = () => {
     setIssideBarOpen(!isSideBarOpen);
@@ -23,7 +22,12 @@ const Dashboard = () => {
   return (
     <div className="font-sans">
       <Top toggleSideBar={toggleSideBar} />
-      <SideBar isSideBarOpen={isSideBarOpen} isAdmin={user?.role === "admin"} />
+
+      <SideBar
+        isSideBarOpen={isSideBarOpen}
+        isAdmin={user?.role === "admin"}
+        setLogOutPopUp={setLogOutPopUp} // ✅ Pass it here!
+      />
 
       <Main>
         <Content>
@@ -35,6 +39,12 @@ const Dashboard = () => {
         </Content>
         <Profile platform={selectedPlatform} />
       </Main>
+
+      {/* ✅ Always add your popup at the end! */}
+      <logOutPopUp
+        logOutPopUp={logOutPopUp}
+        setLogOutPopUp={setLogOutPopUp}
+      />
     </div>
   );
 };

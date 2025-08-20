@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AOS from 'aos'
 import "aos/dist/aos.css"
 import Nav from './section/Nav'
@@ -34,6 +34,7 @@ import VerifyEmail from './section/VerifyEmail'
 import RecoverPassword from './section/RecoverPassword'
 import AddTask from './components/modals/AddTask'
 import AdminTaskManager from './components/modals/AdminTaskManager'
+import SetNewPassword from './components/SetNewPassword'
 // import SignUp from './SignUp'
 // import LoginModal from './LoginModal'
 
@@ -43,7 +44,16 @@ const App = () => {
   const [menuOpen, setMenuOpen] = useState()
   const [isSideBarOpen, setIssideBarOpen] = useState(false);
   const [logOutPopUp, setLogOutPopUp] = useState(false);
-  
+  const [user, setUser] = useState(null); // This will hold your logged-in user data
+
+    useEffect(() => {
+        // Load user from localStorage when component mounts
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
   
   const handleLogOutPopUp = () => {
     setLogOutPopUp(!logOutPopUp);
@@ -87,7 +97,7 @@ const App = () => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path='/dashboard' element={<Dashboard />}/>
           <Route path='/account' element={<AccountModal  toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
-          <Route path='/task' element={<AffliateModal toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
+          <Route path='/task' element={<AffliateModal loggedInUser={user} toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path='/api' element={<ApiModal toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path='/order' element={<OrderModal toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path='/Privacy' element={<PrivacyModal toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
@@ -98,6 +108,7 @@ const App = () => {
           <Route path='/taskcenter' element={<TaskCenter toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen}/>}/>
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/recover-password" element={<RecoverPassword />} />
+          <Route path="/set-new-password" element={<SetNewPassword />} />
           <Route path="/admin/add-task" element={<AddTask toggleSideBar={toggleSideBar} isSideBarOpen={isSideBarOpen} />} />
           <Route
           path="/admin/manage-tasks"

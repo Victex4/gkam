@@ -64,24 +64,10 @@ export const contactDetails = [
    {
         id: 1,
         type: "Email",
-        value: "eberevictory3@gmail.com",
-        link: "mailto:eberevictory3@gmail.com", 
+        value: "support@glambooster.com",
+        link: "mailto:support@glambooster.com", 
         icon: MdEmail 
    },
-   {
-        id: 2,
-        type: "Phone",
-        value: "+234 806 549 3663",
-        link: "tel:08065493663", 
-        icon: FaPhone  
-    },
-   {
-        id: 3,
-        type: "Whatsapp",
-        value: "Glam Booster",
-        link: "https://wa.me/+2348065493663", 
-        icon: FaWhatsapp  
-    },
    {
         id: 3,
         type: "Instagram",

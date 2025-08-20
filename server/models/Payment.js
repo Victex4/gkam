@@ -1,10 +1,17 @@
+// Example Payment schema (models/Payment.js)
 const mongoose = require("mongoose");
 
-const paymentSchema = new mongoose.Schema({
-  amount: { type: String },
-  reference: { type: String },
-  status: { type: String },
-}, { timestamps: true });
+const PaymentSchema = new mongoose.Schema({
+  amount: Number,
+  status: String,
+  link: String,
+  service: String,
+  quantity: Number,
+  startCount: Number,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-const Payment = mongoose.model("paymentProof", paymentSchema);
-module.exports = Payment;
+module.exports = mongoose.model("Payment", PaymentSchema);

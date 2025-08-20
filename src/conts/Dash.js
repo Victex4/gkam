@@ -32,7 +32,7 @@ import user3 from "../assets/user3.png";
 import user4 from "../assets/user4.png";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-export const links = [
+export const baseLinks = [
   {
     href: "/dashboard",
     icon: FaChartBar,
@@ -80,11 +80,6 @@ export const links = [
     icon: MdApi,
     text: "API"
   },
-  {
-    href: "/login",
-    icon: IoIosLogOut,
-    text: "Log-out",
-  }
 ];
 
 

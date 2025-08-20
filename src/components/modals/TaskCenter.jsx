@@ -48,7 +48,7 @@ const TaskCenter = ({ toggleSideBar, isSideBarOpen, loggedInUser }) => {
     <div className="min-h-screen bg-gray-100">
       <Top toggleSideBar={toggleSideBar} />
       <SideBar isSideBarOpen={isSideBarOpen} />
-      <main className="p-4 max-w-xl md:ml-64 mt-32 mx-auto">
+      <main className="p-4 max-w-xl md:ml-64 mt-20 mx-auto">
         <div className="bg-white rounded shadow p-6">
           <h1 className="text-2xl font-bold mb-4">🎯 Social Media Tasks</h1>
           {tasks.length === 0 ? (
