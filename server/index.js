@@ -36,12 +36,14 @@ const allowedOrigins = [
     "https://glam-booster.vercel.app",
 ];
 
+// This CORS configuration is correct for production
 app.use(
     cors({
         origin: allowedOrigins,
         credentials: true,
     })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -63,29 +65,23 @@ const conversionRates = {
 
 
 // =================== AUTH ROUTES ===================
-
-// 1. Signup Route
+// All your existing authentication routes...
 app.post("/api/auth/signup", async (req, res) => {
     const { userName, email, password, confirmPassword, country, ref } = req.body;
-
     if (!userName || !email || !password || !confirmPassword || !country) {
         return res.status(400).json({ message: "All fields are required." });
     }
-
     if (password !== confirmPassword) {
         return res.status(400).json({ message: "Passwords do not match." });
     }
-
     try {
         const existingUser = await EmployeeModel.findOne({ email });
         if (existingUser) {
             return res.status(409).json({ message: "Email already exists." });
         }
-
         const hashedPassword = await bcrypt.hash(password, 10);
         const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
         const verificationTokenExpires = Date.now() + 15 * 60 * 1000;
-
         const newUser = new EmployeeModel({
             userName,
             email,
@@ -96,10 +92,8 @@ app.post("/api/auth/signup", async (req, res) => {
             verificationTokenExpires,
             isVerified: false,
         });
-
         await newUser.save();
 
-        // Using Resend's direct API to send email
         const { error } = await resendClient.emails.send({
             from: `Glam Booster <${process.env.SENDER_EMAIL}>`,
             to: [email],
@@ -119,90 +113,69 @@ app.post("/api/auth/signup", async (req, res) => {
 
         if (error) {
             console.error("❌ Resend Email Send Error:", error);
-            // Don't fail the registration, but inform the user
             return res.status(201).json({
                 message: "Registration successful, but failed to send verification email. Please contact support.",
             });
         }
-
         res.status(201).json({
             message: "Registration successful! An OTP has been sent to your email. Please check your inbox and spam folder to verify your account.",
         });
-
     } catch (err) {
         console.error("❌ Signup Error:", err);
         res.status(500).json({ message: "Server error during signup. Please try again later." });
     }
 });
 
-// 2. OTP Verification Route
 app.post("/api/auth/verify-otp", async (req, res) => {
     const { email, otp } = req.body;
-
     if (!email || !otp) {
         return res.status(400).json({ message: "Email and OTP are required." });
     }
-
     try {
         const user = await EmployeeModel.findOne({ email });
-
         if (!user) {
             return res.status(404).json({ message: "User not found." });
         }
-
         if (user.isVerified) {
             return res.status(400).json({ message: "Account already verified." });
         }
-
         if (user.verificationToken !== otp) {
             return res.status(400).json({ message: "Invalid OTP." });
         }
-
         if (Date.now() > user.verificationTokenExpires) {
             user.verificationToken = undefined;
             user.verificationTokenExpires = undefined;
             await user.save();
             return res.status(400).json({ message: "OTP has expired. Please request a new one." });
         }
-
         user.isVerified = true;
         user.verificationToken = undefined;
         user.verificationTokenExpires = undefined;
         await user.save();
-
         res.status(200).json({ message: "Account verified successfully!" });
-
     } catch (err) {
         console.error("❌ Backend OTP Verification Error:", err);
         res.status(500).json({ message: "Server error during OTP verification. Please try again later." });
     }
 });
 
-
-// User Login Route
 app.post("/api/auth/login", async (req, res) => {
     const { userName, password } = req.body;
-
     try {
         const user = await EmployeeModel.findOne({
             $or: [{ email: userName }, { userName }],
         });
-
         if (!user) {
             return res.status(404).json({ message: "User not found." });
         }
-
         if (!user.isVerified) {
             return res.status(403).json({ message: "Please verify your email first." });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({ message: "Incorrect password." });
         }
-
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-
         res.status(200).json({
             message: "Login successful",
             token,
@@ -220,25 +193,20 @@ app.post("/api/auth/login", async (req, res) => {
     }
 });
 
-
-// FORGOT PASSWORD
 app.post("/api/auth/forgot-password", async (req, res) => {
     const { email } = req.body;
     if (!email) {
         return res.status(400).json({ message: "Email is required." });
     }
-
     try {
         const user = await EmployeeModel.findOne({ email });
         if (!user) {
             return res.status(200).json({ message: "If an account with that email exists, an OTP has been sent to it." });
         }
-
         const resetOtp = Math.floor(100000 + Math.random() * 900000).toString();
         user.resetPasswordToken = resetOtp;
         user.resetPasswordExpires = Date.now() + 10 * 60 * 1000;
         await user.save();
-
         const { error } = await resendClient.emails.send({
             from: `"Glam Booster" <${process.env.SENDER_EMAIL}>`,
             to: [user.email],
@@ -255,90 +223,68 @@ app.post("/api/auth/forgot-password", async (req, res) => {
                 </div>
             `,
         });
-
         if (error) {
             console.error("❌ Resend Password Reset Email Send Error:", error);
             return res.status(500).json({ message: "Failed to send password reset email. Please contact support." });
         }
-
         res.status(200).json({ message: "If an account with that email exists, an OTP has been sent to it." });
-
     } catch (err) {
         console.error("❌ Forgot Password Error:", err);
         res.status(500).json({ message: "Server error. Please try again later." });
     }
 });
 
-
-// VERIFY RESET OTP
 app.post("/api/auth/verify-reset-otp", async (req, res) => {
     const { email, otp } = req.body;
-
     if (!email || !otp) {
         return res.status(400).json({ message: "Email and OTP are required." });
     }
-
     try {
         const user = await EmployeeModel.findOne({ email });
-
         if (!user) {
             return res.status(200).json({ message: "If an account with that email exists, an OTP has been sent." });
         }
-
         if (!user.resetPasswordToken || !user.resetPasswordExpires) {
             return res.status(400).json({ message: "No active password reset request found for this email." });
         }
-
         if (user.resetPasswordToken !== otp) {
             return res.status(400).json({ message: "Invalid OTP." });
         }
-
         if (Date.now() > user.resetPasswordExpires) {
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
             await user.save();
             return res.status(400).json({ message: "OTP has expired. Please request a new one." });
         }
-
         res.status(200).json({ message: "OTP verified successfully. You can now set your new password." });
-
     } catch (err) {
         console.error("❌ Backend Verify Reset OTP Error:", err);
         res.status(500).json({ message: "Server error during OTP verification. Please try again later." });
     }
 });
 
-
-// RESET PASSWORD
 app.post("/api/auth/reset-password", async (req, res) => {
     const { email, otp, newPassword } = req.body;
-
     if (!email || !otp || !newPassword) {
         return res.status(400).json({ message: "Email, OTP, and new password are required." });
     }
-
     try {
         const user = await EmployeeModel.findOne({ email });
-
         if (!user) {
             return res.status(404).json({ message: "User not found." });
         }
-
         if (!user.resetPasswordToken || user.resetPasswordToken !== otp || Date.now() > user.resetPasswordExpires) {
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
             await user.save();
             return res.status(400).json({ message: "Invalid or expired OTP. Please request a new password reset." });
         }
-
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         user.password = hashedPassword;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
         await user.save();
-
         res.status(200).json({ message: "Your password has been successfully reset." });
-
     } catch (err) {
         console.error("❌ Backend Reset Password Error:", err);
         res.status(500).json({ message: "Server error during password reset. Please try again later." });
@@ -348,12 +294,10 @@ app.post("/api/auth/reset-password", async (req, res) => {
 
 // =================== USER ROUTES ===================
 app.get("/api/user/me", protect, async (req, res) => {
-    // The protect middleware adds the user to the request object
     const user = await EmployeeModel.findById(req.user.id).select("-password");
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
 });
-
 
 app.get("/api/user/profile/:id", protect, async (req, res) => {
     try {
@@ -415,35 +359,28 @@ app.delete("/api/tasks/:id", protect, async (req, res) => {
 // USER TASK COMPLETION ROUTES
 app.post("/api/complete-task", protect, async (req, res) => {
     const { taskId } = req.body;
-    const userId = req.user.id; // Get user from auth middleware
-
+    const userId = req.user.id;
     if (!userId || !taskId) {
         return res.status(400).json({ message: "Missing userId or taskId" });
     }
-
     try {
         const task = await Task.findById(taskId);
         if (!task) {
             return res.status(404).json({ message: "Task not found." });
         }
-
         const existingRecord = await UserTask.findOne({ userId, taskId });
         if (existingRecord) {
             return res.status(409).json({ message: "Task already completed by this user." });
         }
-
         const record = await UserTask.create({
             userId,
             taskId,
             completed: true,
             rewardAmount: task.reward
         });
-
-        // Optionally, update user's balance here
         const user = await EmployeeModel.findById(userId);
         user.balance += task.reward;
         await user.save();
-
         res.json({ message: "Task marked as complete", record });
     } catch (err) {
         console.error("❌ Failed to mark task complete:", err);
@@ -460,9 +397,7 @@ app.get("/api/stats", async (req, res) => {
             { $match: { status: "success" } },
             { $group: { _id: null, total: { $sum: "$amount" } } }
         ]);
-
         const availableBalance = totalAmountPaid[0]?.total || 0;
-
         res.json({
             totalOrders,
             completedTasks,
@@ -475,7 +410,6 @@ app.get("/api/stats", async (req, res) => {
     }
 });
 
-// GET all orders
 app.get("/api/orders", async (req, res) => {
     try {
         const orders = await Payment.find().sort({ createdAt: -1 });
@@ -488,27 +422,20 @@ app.get("/api/orders", async (req, res) => {
 
 
 // =================== PAYMENT ROUTES ===================
-// KORAPAY PAYMENT
 app.post("/api/initiate-payment", protect, async (req, res) => {
     const { amount, currency } = req.body;
     const userId = req.user.id;
-
     if (!amount || !currency) {
         return res.status(400).json({ message: "Amount and currency are required" });
     }
-
     const reference = `BOOST-${uuidv4()}`;
-
     try {
         const korapayRes = await axios.post(
             "https://api.korapay.com/merchant/api/v1/checkout",
             { amount: parseFloat(amount), currency, redirect_url: process.env.VITE_FRONTEND_URL + "/dashboard", reference },
             { headers: { Authorization: `Bearer ${process.env.KORAPAY_SECRET_KEY}`, "Content-Type": "application/json" } }
         );
-
         const { checkout_url } = korapayRes.data.data;
-
-        // Save a pending payment to the database
         const newPayment = new Payment({
             userId,
             reference,
@@ -517,7 +444,6 @@ app.post("/api/initiate-payment", protect, async (req, res) => {
             currency,
         });
         await newPayment.save();
-
         res.status(200).json({ checkout_url });
     } catch (error) {
         console.error("❌ Korapay error:", error?.response?.data || error.message);
@@ -528,18 +454,14 @@ app.post("/api/initiate-payment", protect, async (req, res) => {
     }
 });
 
-
 app.post("/api/confirm-payment", async (req, res) => {
     const { reference, status } = req.body;
-
     try {
-        // Find the payment and update its status
         const payment = await Payment.findOneAndUpdate(
             { reference },
             { status },
             { new: true }
         );
-
         if (payment) {
             console.log(`Payment with reference ${reference} updated to status: ${status}`);
             return res.status(200).json({ message: "Payment confirmed successfully." });
@@ -552,14 +474,11 @@ app.post("/api/confirm-payment", async (req, res) => {
     }
 });
 
-
-// GLAM BOOSTER
 app.post("/api/glam/place-order", async (req, res) => {
     const { service, link, quantity } = req.body;
     if (!service || !link || !quantity) {
         return res.status(400).json({ message: "All fields are required." });
     }
-
     try {
         const payload = {
             key: process.env.GLAM_API_KEY,
@@ -576,24 +495,18 @@ app.post("/api/glam/place-order", async (req, res) => {
     }
 });
 
-
-// CRYPTOMUS PAYMENT
 app.post("/api/cryptomus-payment", protect, async (req, res) => {
     const { amount, currency } = req.body;
     const userId = req.user.id;
-
     if (!amount || !currency) {
         return res.status(400).json({ message: "Missing required payment details." });
     }
-
     const cryptomusApiKey = process.env.CRYPTOMUS_API_KEY;
     const cryptomusMerchantId = process.env.CRYPTOMUS_MERCHANT_ID;
-
     if (!cryptomusApiKey || !cryptomusMerchantId) {
         console.error("Cryptomus API keys not configured.");
         return res.status(500).json({ message: "Cryptomus payment gateway not configured." });
     }
-
     try {
         let amountInTargetCurrency = parseFloat(amount);
         if (currency === "NGN") {
@@ -603,22 +516,18 @@ app.post("/api/cryptomus-payment", protect, async (req, res) => {
             }
             amountInTargetCurrency = amount * rate;
         }
-
         const orderId = `order_${uuidv4()}`;
-
         const cryptomusPayload = {
             amount: amountInTargetCurrency.toFixed(2),
-            currency: "USD", // Corrected currency to be a stablecoin like USD or USDT
+            currency: "USD",
             order_id: orderId,
             url_return: `${process.env.VITE_FRONTEND_URL}/payment-success`,
             url_success: `${process.env.VITE_FRONTEND_URL}/payment-success`,
             url_failure: `${process.env.VITE_FRONTEND_URL}/payment-fail`,
         };
-
         const signature = crypto.createHash('md5')
             .update(Buffer.from(JSON.stringify(cryptomusPayload)).toString('base64') + cryptomusApiKey)
             .digest('hex');
-
         const cryptomusResponse = await axios.post('https://api.cryptomus.com/v1/payment', cryptomusPayload, {
             headers: {
                 'Content-Type': 'application/json',
@@ -626,7 +535,6 @@ app.post("/api/cryptomus-payment", protect, async (req, res) => {
                 'sign': signature
             }
         });
-
         if (cryptomusResponse.data?.result?.url) {
             const newPayment = new Payment({
                 userId,
@@ -635,10 +543,9 @@ app.post("/api/cryptomus-payment", protect, async (req, res) => {
                 amount: parseFloat(amount),
                 currency,
                 gateway: 'cryptomus',
-                externalId: cryptomusResponse.data.result.uuid // Cryptomus's payment ID
+                externalId: cryptomusResponse.data.result.uuid
             });
             await newPayment.save();
-
             res.status(200).json({
                 message: "Cryptomus payment initiated.",
                 paymentUrl: cryptomusResponse.data.result.url,
@@ -648,30 +555,24 @@ app.post("/api/cryptomus-payment", protect, async (req, res) => {
             console.error("Cryptomus API response error:", cryptomusResponse.data);
             res.status(500).json({ message: "Failed to initiate Cryptomus payment. Invalid response from gateway." });
         }
-
     } catch (error) {
         console.error("❌ Cryptomus payment error:", error.response?.data || error.message);
         res.status(500).json({ message: "Server error initiating Cryptomus payment.", error: error.message });
     }
 });
 
-// PAYPAL PAYMENT
 app.post("/api/paypal-payment", protect, async (req, res) => {
     const { amount, currency } = req.body;
     const userId = req.user.id;
-
     if (!amount || !currency) {
         return res.status(400).json({ message: "Missing required payment details." });
     }
-
     const paypalClientId = process.env.PAYPAL_CLIENT_ID;
     const paypalSecret = process.env.PAYPAL_SECRET;
     const paypalApiBaseUrl = process.env.PAYPAL_API_BASE_URL || 'https://api-m.sandbox.paypal.com';
-
     if (!paypalClientId || !paypalSecret) {
         return res.status(500).json({ message: "PayPal payment gateway not configured." });
     }
-
     try {
         const authString = Buffer.from(`${paypalClientId}:${paypalSecret}`).toString('base64');
         const tokenResponse = await axios.post(`${paypalApiBaseUrl}/v1/oauth2/token`,
@@ -684,7 +585,6 @@ app.post("/api/paypal-payment", protect, async (req, res) => {
             }
         );
         const accessToken = tokenResponse.data.access_token;
-
         const paypalOrderPayload = {
             intent: 'CAPTURE',
             purchase_units: [{
@@ -698,7 +598,6 @@ app.post("/api/paypal-payment", protect, async (req, res) => {
                 cancel_url: `${process.env.VITE_FRONTEND_URL}/payment-fail`,
             }
         };
-
         const orderResponse = await axios.post(`${paypalApiBaseUrl}/v2/checkout/orders`,
             paypalOrderPayload,
             {
@@ -708,10 +607,8 @@ app.post("/api/paypal-payment", protect, async (req, res) => {
                 }
             }
         );
-
         const approvalUrl = orderResponse.data.links.find(link => link.rel === 'approve').href;
         const orderId = orderResponse.data.id;
-
         const newPayment = new Payment({
             userId,
             reference: orderId,
@@ -721,13 +618,11 @@ app.post("/api/paypal-payment", protect, async (req, res) => {
             gateway: 'paypal'
         });
         await newPayment.save();
-
         res.status(200).json({
             message: "PayPal payment initiated.",
             approvalUrl,
             orderId
         });
-
     } catch (error) {
         console.error("❌ PayPal payment error:", error.response?.data || error.message);
         res.status(500).json({ message: "Server error initiating PayPal payment.", error: error.message });
@@ -752,3 +647,4 @@ if (process.env.NODE_ENV !== "production") {
 // =================== EXPORT for VERCEL ===================
 module.exports = app;
 module.exports.handler = serverless(app);
+ 
