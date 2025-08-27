@@ -422,6 +422,9 @@ app.get("/api/orders", async (req, res) => {
 
 
 // =================== PAYMENT ROUTES ===================
+// NOTE: This OPTIONS handler is added to explicitly handle preflight requests for the /api/confirm-payment endpoint
+// This is crucial for resolving the CORS errors during development
+app.options("/api/confirm-payment", cors());
 app.post("/api/initiate-payment", protect, async (req, res) => {
     const { amount, currency } = req.body;
     const userId = req.user.id;
@@ -647,4 +650,3 @@ if (process.env.NODE_ENV !== "production") {
 // =================== EXPORT for VERCEL ===================
 module.exports = app;
 module.exports.handler = serverless(app);
- 
